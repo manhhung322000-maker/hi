@@ -26,8 +26,8 @@ window.CONFIG = {
     page1: "#d42a3e",      // nền trang: màu sáng ở giữa
     page2: "#9a1428",      // nền trang: màu giữa
     page3: "#520813",      // nền trang: màu tối ở rìa
-    cardFront: "#F5F0E4",  // mặt trước thiệp
-    cardBack: "#F5F0E4",   // mặt sau thiệp
+    cardFront: "#800020",  // mặt trước thiệp
+    cardBack: "#fffaf2",   // mặt sau thiệp
     gold: "#d9b45a",       // màu viền vàng
     accent: "#800020",     // màu tiêu đề, nút và chữ nhấn
     text: "#3d000e"        // màu chữ trên nền sáng
@@ -55,7 +55,7 @@ window.CONFIG = {
   lunar: "nhằm ngày 11 tháng 11 năm Bính Ngọ",
   venue: "Tư gia",
   addr: "Thôn 5, Xã Vũ Quý, Kiến Xương, Tp Thái Bình cũ",
-  mapurl: "https://maps.app.goo.gl/aSahSt3VBhzEaq55A",                  // dán link Google Maps vào đây (để trống sẽ tự tìm theo địa chỉ)
+  mapurl: "",                  // dán link Google Maps vào đây (để trống sẽ tự tìm theo địa chỉ)
 
   /* ---------- Ảnh cưới (hiện ở mặt sau thiệp, thay cho phần tên) ---------- */
   photo: "anhcuoi.jpg",                   // ví dụ: "images/cuoi.jpg" (để trống nếu không dùng)
@@ -105,6 +105,9 @@ window.CONFIG = {
   mapTitle: "Chỉ đường",
   mapBtn: "Mở Google Maps để chỉ đường",
   printBtn: "In thiệp (A5, 2 mặt)",
+
+  // Link Google Apps Script để mọi khách xem được lời chúc của nhau (để trống "" = chỉ lưu trên máy từng người)
+  wishUrl: "https://script.google.com/macros/s/AKfycbzzS8mzylHTBeokNJvU_QOtf4jEgPwC0xdxr2rwhICts9JhI5RqvRkZh2eLhjuJfZv1ag/exec",
 
   wishTitle: "Sổ lưu bút",
   wishSub: "Gửi lời chúc đến cô dâu chú rể",

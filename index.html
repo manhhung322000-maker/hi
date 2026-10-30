@@ -433,7 +433,8 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,a.b:focus-visibl
 .face.back .date small,.face.back .thanks{color:#8a7a62}
 .face.back .rule{background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 .face.back .ph{border:1px solid var(--gold);background:var(--paper);box-shadow:0 .2em .7em rgba(90,70,40,.28)}
-/* ẩn nút In thiệp */
+
+/* ẩn nút In thiệp: muốn hiện lại thì xóa dòng này */
 #prt,#pmsg{display:none!important}
 </style>
 </head>
@@ -716,8 +717,9 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,a.b:focus-visibl
   tick();setInterval(tick,1000);
   function fmt(ts){try{var d=new Date(ts);return d.toLocaleDateString("vi-VN")+" "+d.toLocaleTimeString("vi-VN",{hour:"2-digit",minute:"2-digit"})}catch(e){return ""}}
   var DB=null,WL=[],LOC=[];
+  var WU=String((window.CONFIG||{}).wishUrl||"").trim();
   try{LOC=JSON.parse(localStorage.getItem("wishes"))||[]}catch(e){LOC=[]}
-  function note(){$("wnote").textContent=DB?"Lời chúc được lưu chung, mọi người xem thiệp đều đọc được.":"Lời chúc đang được lưu trên thiết bị này."}
+  function note(){$("wnote").textContent=(DB||WU)?"Lời chúc được lưu chung, mọi người xem thiệp đều đọc được.":"Lời chúc đang được lưu trên thiết bị này."}
   function drawW(){var box=$("wl"),list=WL.concat(LOC).sort(function(a,b){return b.ts-a.ts});box.textContent="";
     if(!list.length){box.textContent="Chưa có lời chúc nào. Hãy là người đầu tiên!";return}
     list.forEach(function(w){var d=document.createElement("div");d.className="w";
@@ -726,6 +728,10 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,a.b:focus-visibl
       var p=document.createElement("p");p.textContent=w.text;
       d.appendChild(m);d.appendChild(b);d.appendChild(p);box.appendChild(d)})}
   drawW();note();
+  function loadRemote(){if(!WU)return;
+    fetch(WU+(WU.indexOf("?")>-1?"&":"?")+"t="+Date.now()).then(function(r){return r.json()}).then(function(a){
+      if(Array.isArray(a)){WL=a.map(function(x){return{name:String(x.name||""),text:String(x.text||""),ts:+x.ts||0}});drawW()}}).catch(function(){})}
+  if(WU){loadRemote();setInterval(loadRemote,30000)}
   if(window.claude&&claude.use)claude.use("db").then(function(db){if(!db)return;DB=db;note();
     db.collection("wishes").orderBy("ts","desc").limit(200).onSnapshot(function(s){WL=s.docs.map(function(d){return d.data()});drawW()},function(){DB=null;WL=[];note();drawW()})}).catch(function(){});
   $("prt").onclick=function(){
@@ -742,7 +748,9 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,a.b:focus-visibl
     var w={name:$("wn").value.trim().slice(0,40),text:t.slice(0,400),ts:Date.now()};
     function ok(m){$("wt").value="";$("msg").textContent=m;burst(innerWidth/2,innerHeight*.75,50,4)}
     function local(m){LOC.push(w);try{localStorage.setItem("wishes",JSON.stringify(LOC))}catch(e){}drawW();ok(m)}
-    if(DB)DB.collection("wishes").add(w).then(function(){ok("Cảm ơn bạn! Lời chúc đã được gửi.")},function(){local("Cảm ơn bạn! Bạn chưa có quyền gửi chung nên lời chúc được lưu trên thiết bị này.")});
+    if(WU){var bd=new URLSearchParams();bd.append("name",w.name);bd.append("text",w.text);bd.append("ts",w.ts);
+      fetch(WU,{method:"POST",mode:"no-cors",body:bd}).then(function(){WL.push(w);drawW();ok("Cảm ơn bạn! Lời chúc đã được gửi.");setTimeout(loadRemote,2500)},function(){local("Cảm ơn bạn! Chưa gửi chung được nên lời chúc được lưu trên thiết bị này.")})}
+    else if(DB)DB.collection("wishes").add(w).then(function(){ok("Cảm ơn bạn! Lời chúc đã được gửi.")},function(){local("Cảm ơn bạn! Bạn chưa có quyền gửi chung nên lời chúc được lưu trên thiết bị này.")});
     else local("Cảm ơn bạn! Lời chúc đã được lưu trên thiết bị này.")};
 })();
 </script>
