@@ -27,7 +27,7 @@ window.CONFIG = {
     page2: "#9a1428",      // nền trang: màu giữa
     page3: "#520813",      // nền trang: màu tối ở rìa
     cardFront: "#F5F0E4",  // mặt trước thiệp
-    cardBack: "#fffaf2",   // mặt sau thiệp
+    cardBack: "#F5F0E4",   // mặt sau thiệp
     gold: "#d9b45a",       // màu viền vàng
     accent: "#800020",     // màu tiêu đề, nút và chữ nhấn
     text: "#3d000e"        // màu chữ trên nền sáng
