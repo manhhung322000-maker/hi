@@ -55,7 +55,7 @@ window.CONFIG = {
   lunar: "nhằm ngày 11 tháng 11 năm Bính Ngọ",
   venue: "Tư gia",
   addr: "Thôn 5, Xã Vũ Quý, Kiến Xương, Tp Thái Bình cũ",
-  mapurl: "",                  // dán link Google Maps vào đây (để trống sẽ tự tìm theo địa chỉ)
+  mapurl: "https://maps.app.goo.gl/1A8h8aBYeLgVo42Q8",                  // dán link Google Maps vào đây (để trống sẽ tự tìm theo địa chỉ)
 
   /* ---------- Ảnh cưới (hiện ở mặt sau thiệp, thay cho phần tên) ---------- */
   photo: "anhcuoi.jpg",                   // ví dụ: "images/cuoi.jpg" (để trống nếu không dùng)
