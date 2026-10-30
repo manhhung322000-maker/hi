@@ -359,6 +359,9 @@ body{overflow-x:clip;max-width:100%}
 .dv::after{background:linear-gradient(270deg,transparent,currentColor)}
 
 .fd,.date strong,.cd span,.grid,.grid span,#cnt{font-family:var(--f-num,"Lora"),"Playfair Display",serif!important;font-variant-numeric:lining-nums tabular-nums;font-feature-settings:"lnum" 1}
+
+/* số thẳng hàng cho toàn trang (sửa lỗi số 5 bị tụt xuống) */
+body,button,input,textarea,a,p,span,b,strong,small,i,div{font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
 </style>
 </head>
 <body>
@@ -565,7 +568,7 @@ body{overflow-x:clip;max-width:100%}
   $("lb").addEventListener("touchend",function(e){var dx=e.changedTouches[0].clientX-tsx;if(Math.abs(dx)>50)openLb(LI+(dx<0?1:-1))});
   var target=0;render();applyAppearance();
   (function(){var f=(DEF.fonts||{}).numbers||"Lora";
-    var l=document.createElement("link");l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family="+encodeURIComponent(f).replace(/%20/g,"+")+":wght@400;500;600;700&display=swap";document.head.appendChild(l);
+    var l=document.createElement("link");l.rel="stylesheet";var fam=encodeURIComponent(f).replace(/%20/g,"+");l.href="https://fonts.googleapis.com/css2?family="+fam+":wght@400;500;600;700&display=swap";l.onerror=function(){l.onerror=null;l.href="https://fonts.googleapis.com/css2?family="+fam+"&display=swap"};document.head.appendChild(l);
     document.documentElement.style.setProperty("--f-num",'"'+f+'"')})();
 
   /* ---- fx: petals + glitter ---- */
