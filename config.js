@@ -55,7 +55,7 @@ window.CONFIG = {
   lunar: "nhằm ngày 11 tháng 11 năm Bính Ngọ",
   venue: "Tư gia",
   addr: "Thôn 5, Xã Vũ Quý, Kiến Xương, Tp Thái Bình cũ",
-  mapurl: "",                  // dán link Google Maps vào đây (để trống sẽ tự tìm theo địa chỉ)
+  mapurl: "https://maps.app.goo.gl/aSahSt3VBhzEaq55A",                  // dán link Google Maps vào đây (để trống sẽ tự tìm theo địa chỉ)
 
   /* ---------- Ảnh cưới (hiện ở mặt sau thiệp, thay cho phần tên) ---------- */
   photo: "anhcuoi.jpg",                   // ví dụ: "images/cuoi.jpg" (để trống nếu không dùng)
@@ -79,7 +79,7 @@ window.CONFIG = {
      Nên đặt tên file không dấu, không khoảng trắng (ví dụ: nhac.mp3).
      Nhạc tự phát khi khách chạm vào nút thắt vàng mở thiệp. */
   music: "nhac.mp3",
-  musicVolume: 0.6,            // âm lượng từ 0 đến 1
+  musicVolume: 0.5,            // âm lượng từ 0 đến 1
 
   /* ---------- Chữ trên giao diện ---------- */
   hintOpen: "Chạm vào nút thắt vàng để mở thiệp",
