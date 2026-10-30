@@ -107,7 +107,7 @@ body{margin:0;color:var(--ink);font-family:"Cormorant Garamond","Times New Roman
 
 /* after */
 .after{position:relative;z-index:1;display:none;max-width:520px;margin:0 auto;padding:0 16px 70px;text-align:center}
-.open .after{display:block;animation:in .8s .6s both}@keyframes in{from{opacity:0;transform:translateY(14px)}}
+.open .after{display:block;animation:in .5s .1s both}@keyframes in{from{opacity:0;transform:translateY(14px)}}
 .panel{background:#fbeff1;border:1px solid var(--rg);padding:20px;margin-bottom:22px}
 .mapart{width:100%;height:auto;display:block;border:1px solid var(--rg);margin-bottom:12px}.mv{margin:0 0 10px}.mv b{display:block;color:var(--rose);font-size:1.2em}
 a.b{display:inline-block;text-decoration:none;font:inherit;font-size:17px;line-height:1.4;min-height:44px;padding:10px 20px;border:1px solid var(--rose);background:var(--rose);color:#fff;margin:4px}
@@ -540,7 +540,9 @@ body,button,input,textarea,a,p,span,b,strong,small,i,div{font-variant-numeric:li
     var im = document.createElement("img");
     im.src = u;
     im.alt = "Ảnh cưới " + (i + 1);
-    im.loading = "lazy";
+    im.loading = i < 4 ? "eager" : "lazy";
+    im.decoding = "async";
+    if (i === 0) im.fetchPriority = "high";
     im.draggable = false;
     
     wrap.appendChild(im);
@@ -561,7 +563,7 @@ body,button,input,textarea,a,p,span,b,strong,small,i,div{font-variant-numeric:li
       
       el.style.pointerEvents = ad > 2 ? "none" : "auto";});
     $("cnt").textContent=n?(AI+1)+" / "+n:""}
-  function go(i){var n=(D.album||[]).length;if(!n)return;AI=(i+n)%n;cfPos()}
+  function go(i){var n=(D.album||[]).length;if(!n)return;AI=(i+n)%n;cfPos();[1,2].forEach(function(k){var im=new Image();im.src=D.album[(AI+k)%n]})}
   function drawAlb(){var a=D.album||[],box=$("ag"),b2=$("ag2");box.textContent="";b2.textContent="";$("alb").hidden=!a.length;AI=Math.min(AI,Math.max(a.length-1,0));
     a.forEach(function(u,i){box.appendChild(mk(u,i,function(){if(mv)return;i===AI?openAm():go(i)}));b2.appendChild(mk(u,i,function(){openLb(i)}))});cfPos()}
   $("allbtn").onclick=openAm;$("ax").onclick=function(){$("am").hidden=true};
@@ -638,6 +640,13 @@ body,button,input,textarea,a,p,span,b,strong,small,i,div{font-variant-numeric:li
     mb.addEventListener("click",function(){clearInterval(fadeT);if(mus.paused){mus.volume=VOL;playM()}else mus.pause()});
     document.addEventListener("visibilitychange",function(){if(document.hidden&&!mus.paused){mus.pause();mus.dataset.auto=1}else if(!document.hidden&&mus.dataset.auto){mus.dataset.auto="";playM()}});
   }
+  /* ---- tải sẵn toàn bộ trang (ảnh album...) trong lúc khách còn ở phong bì ---- */
+  function warm(){
+    document.querySelectorAll("img[loading=lazy]").forEach(function(im){im.loading="eager"});
+    (D.album||[]).concat(D.photo?[D.photo]:[]).forEach(function(u){var m=new Image();m.decoding="async";m.src=u});
+  }
+  if(document.readyState==="complete")setTimeout(warm,300);else addEventListener("load",function(){setTimeout(warm,300)});
+  $("seal").addEventListener("click",warm);
   var box=$("cd");
   function tick(){var d=Math.max(0,target-Date.now()),v=[Math.floor(d/864e5),Math.floor(d%864e5/36e5),Math.floor(d%36e5/6e4),Math.floor(d%6e4/1e3)],l=[D.uDay,D.uHour,D.uMin,D.uSec];
     box.innerHTML=v.map(function(n,i){return "<div><span>"+(isNaN(n)?0:n)+"</span><i>"+l[i]+"</i></div>"}).join("")}
