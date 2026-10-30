@@ -15,8 +15,8 @@ window.CONFIG = {
     names:   "Allura",              // Tên cô dâu chú rể
     titles:  "Allura",              // Tiêu đề viết tay: Sổ lưu bút, Chỉ đường, Tháng...
     labels:  "Playfair Display",    // Nhãn in hoa: THIỆP MỜI CƯỚI, NHÀ GÁI, Tư gia...
-    numbers: "Great Vibes",                // Ngày tháng, đếm ngược, lịch (chọn font số thẳng hàng, không bị lệch dòng)
-    body:    "Great Vibes"   // Lời mời, địa chỉ và nội dung thường
+    numbers: "Lora",                // Ngày tháng, đếm ngược, lịch (chọn font số thẳng hàng, không bị lệch dòng)
+    body:    "Cormorant Garamond"   // Lời mời, địa chỉ và nội dung thường
   },
 
   /* ============================================================
@@ -72,6 +72,14 @@ window.CONFIG = {
     "3.jpg",
     "4.jpg",
   ],
+
+  /* ---------- NHẠC NỀN ----------
+     Bỏ file nhạc (mp3) vào cùng thư mục với index.html rồi ghi tên file vào đây.
+     Muốn đổi bài: thay tên file khác. Để trống "" nếu không dùng nhạc.
+     Nên đặt tên file không dấu, không khoảng trắng (ví dụ: nhac.mp3).
+     Nhạc tự phát khi khách chạm vào nút thắt vàng mở thiệp. */
+  music: "nhac.mp3",
+  musicVolume: 0.6,            // âm lượng từ 0 đến 1
 
   /* ---------- Chữ trên giao diện ---------- */
   hintOpen: "Chạm vào nút thắt vàng để mở thiệp",

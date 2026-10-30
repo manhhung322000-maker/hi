@@ -362,6 +362,16 @@ body{overflow-x:clip;max-width:100%}
 
 /* số thẳng hàng cho toàn trang (sửa lỗi số 5 bị tụt xuống) */
 body,button,input,textarea,a,p,span,b,strong,small,i,div{font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
+
+.mbtn{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);right:10px;z-index:56;width:44px;height:44px;border-radius:50%;border:1px solid #e8c76a;background:rgba(92,0,22,.8);color:#ffe3b0;display:grid;place-items:center;padding:0;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.mbtn[hidden]{display:none}
+.mbtn svg{width:22px;height:22px}
+.mbtn .off{display:none}
+.mbtn.mute .on{display:none}.mbtn.mute .off{display:block}
+.mbtn:not(.mute) svg{animation:mspin 6s linear infinite}
+@keyframes mspin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.mbtn:not(.mute) svg{animation:none}}
+@media print{.mbtn{display:none!important}}
 </style>
 </head>
 <body>
@@ -448,6 +458,7 @@ body,button,input,textarea,a,p,span,b,strong,small,i,div{font-variant-numeric:li
   <img id="li" alt=""><button id="lnx" aria-label="Ảnh sau">›</button><p id="lc"></p>
 </div>
 
+<button class="mbtn mute" id="mbtn" hidden aria-label="Bật/tắt nhạc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><g class="on"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></g><g class="off"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/><path d="M3 3l18 18"/></g></svg></button>
 <script src="config.js"></script>
 <script>
 (function(){
@@ -608,6 +619,21 @@ body,button,input,textarea,a,p,span,b,strong,small,i,div{font-variant-numeric:li
   card.addEventListener("click",doFlip);
   card.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();doFlip()}});
 
+  /* ---- nhạc nền ---- */
+  var mus=null,mb=$("mbtn");
+  if(D.music&&String(D.music).trim()){
+    mus=new Audio(String(D.music).trim());mus.loop=true;mus.preload="auto";
+    var VOL=Math.min(1,Math.max(0,D.musicVolume==null?.6:+D.musicVolume)),fadeT=null;mus.volume=VOL;
+    var fadeIn=function(ms){clearInterval(fadeT);var t0=Date.now();mus.volume=0;fadeT=setInterval(function(){var k=Math.min(1,(Date.now()-t0)/ms);mus.volume=VOL*k;if(k>=1)clearInterval(fadeT)},100)};
+    mb.hidden=false;
+    var setM=function(){mb.classList.toggle("mute",mus.paused)};
+    mus.addEventListener("play",setM);mus.addEventListener("pause",setM);
+    var playM=function(){var p=mus.play();if(p&&p.catch)p.catch(function(){setM()})};
+    /* chạm phong bì: mở khóa âm thanh ở mức 0, đợi thiệp mở ra rồi mới to dần */
+    $("seal").addEventListener("click",function(){mus.volume=0;playM();setTimeout(function(){fadeIn(5000)},1900)});
+    mb.addEventListener("click",function(){clearInterval(fadeT);if(mus.paused){mus.volume=VOL;playM()}else mus.pause()});
+    document.addEventListener("visibilitychange",function(){if(document.hidden&&!mus.paused){mus.pause();mus.dataset.auto=1}else if(!document.hidden&&mus.dataset.auto){mus.dataset.auto="";playM()}});
+  }
   var box=$("cd");
   function tick(){var d=Math.max(0,target-Date.now()),v=[Math.floor(d/864e5),Math.floor(d%864e5/36e5),Math.floor(d%36e5/6e4),Math.floor(d%6e4/1e3)],l=[D.uDay,D.uHour,D.uMin,D.uSec];
     box.innerHTML=v.map(function(n,i){return "<div><span>"+(isNaN(n)?0:n)+"</span><i>"+l[i]+"</i></div>"}).join("")}
