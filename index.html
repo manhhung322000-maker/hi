@@ -357,6 +357,8 @@ body{overflow-x:clip;max-width:100%}
 .dv svg{width:1em;height:1em;flex:none}
 .dv::before,.dv::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,currentColor)}
 .dv::after{background:linear-gradient(270deg,transparent,currentColor)}
+
+.fd,.date strong,.cd span,.grid,.grid span,#cnt{font-family:var(--f-num,"Lora"),"Playfair Display",serif!important;font-variant-numeric:lining-nums tabular-nums;font-feature-settings:"lnum" 1}
 </style>
 </head>
 <body>
@@ -562,6 +564,9 @@ body{overflow-x:clip;max-width:100%}
   var tsx=0;$("lb").addEventListener("touchstart",function(e){tsx=e.touches[0].clientX},{passive:true});
   $("lb").addEventListener("touchend",function(e){var dx=e.changedTouches[0].clientX-tsx;if(Math.abs(dx)>50)openLb(LI+(dx<0?1:-1))});
   var target=0;render();applyAppearance();
+  (function(){var f=(DEF.fonts||{}).numbers||"Lora";
+    var l=document.createElement("link");l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family="+encodeURIComponent(f).replace(/%20/g,"+")+":wght@400;500;600;700&display=swap";document.head.appendChild(l);
+    document.documentElement.style.setProperty("--f-num",'"'+f+'"')})();
 
   /* ---- fx: petals + glitter ---- */
   function size(){var d=Math.min(devicePixelRatio||1,1.5);cv.width=cv0.width=Math.round(innerWidth*d);cv.height=cv0.height=Math.round(innerHeight*d);cx.setTransform(d,0,0,d,0,0);pc.setTransform(d,0,0,d,0,0)}

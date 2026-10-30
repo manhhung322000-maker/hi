@@ -15,7 +15,7 @@ window.CONFIG = {
     names:   "Allura",              // Tên cô dâu chú rể
     titles:  "Allura",              // Tiêu đề viết tay: Sổ lưu bút, Chỉ đường, Tháng...
     labels:  "Playfair Display",    // Nhãn in hoa: THIỆP MỜI CƯỚI, NHÀ GÁI, Tư gia...
-    numbers: "Playfair Display",    // Ngày tháng, đếm ngược, lịch
+    numbers: "Lora",                // Ngày tháng, đếm ngược, lịch (chọn font số thẳng hàng, không bị lệch dòng)
     body:    "Cormorant Garamond"   // Lời mời, địa chỉ và nội dung thường
   },
 
