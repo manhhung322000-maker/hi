@@ -392,6 +392,39 @@ body,button,input,textarea,a,p,span,b,strong,small,i,div{font-variant-numeric:li
 .back .inv{display:none}
 .ph{height:11em}
 .date strong{font-size:1.8em;letter-spacing:.1em;line-height:1.15}
+
+/* ===== PHẦN DƯỚI THIỆP: nền kem, viền vàng kép, bo góc (hợp concept thiệp) ===== */
+:root{--gold:#A88857;--gold-d:#8a6a3a;--cream:#F5F0E4;--paper:#FFFDF8;--brown:#635B4D}
+.panel:not(.alb){background:var(--cream);color:var(--brown);border:1px solid var(--gold);border-radius:22px;outline:1px solid rgba(168,136,87,.6);outline-offset:-7px;padding:26px 22px;box-shadow:0 14px 34px rgba(40,0,10,.38)}
+.cal h3,.map h3,.wish h2{color:var(--gold-d)}
+.alb h3{color:var(--gold-d);background:var(--cream);border:1px solid var(--gold);outline:1px solid rgba(168,136,87,.6);outline-offset:-5px;border-radius:999px}
+.cnt{color:#f3e3bd}
+.cd div{background:var(--paper);border:1px solid var(--gold);border-radius:16px;outline:1px solid rgba(168,136,87,.45);outline-offset:-4px}
+.cd span{color:var(--gold-d)}
+.cd i{color:#8a7a62}
+.grid b{color:#8a7a62}
+.grid .on{background:linear-gradient(145deg,#bf9d63,#8a6a3a);color:#fffaf0;box-shadow:0 3px 10px rgba(90,60,20,.35)}
+.grid .on::after{color:#b3454f}
+.mapart{border-radius:16px;border:1px solid var(--gold)}
+.mapart [fill="#f4e4e7"]{fill:#EFE6D2}
+.mapart [fill="#d3e2ee"]{fill:#D9E0DB}
+.mapart [fill="#d2e4cf"]{fill:#E1E3CC}
+.mapart [fill="#8a1228"]{fill:#A0804C}
+.mapart [stroke="#fff"]{stroke:#FBF8F0}
+.mv b{color:var(--gold-d)}
+button.b,a.b{border-radius:999px;border:1px solid var(--gold);background:var(--cream);color:var(--gold-d);padding:11px 26px;letter-spacing:.03em;box-shadow:0 4px 12px rgba(40,0,10,.28)}
+button.b.p,a.b{background:linear-gradient(135deg,#c2a068,#8f6f3d);border-color:#8a6a3a;color:#fffaf0;text-shadow:0 1px 0 rgba(60,40,10,.25)}
+input,textarea{border:1px solid var(--gold);border-radius:14px;background:var(--paper);color:#4d4336;padding:12px 14px}
+input::placeholder,textarea::placeholder{color:#a39a88}
+button:focus-visible,input:focus-visible,textarea:focus-visible,a.b:focus-visible{outline:2px solid var(--gold-d);outline-offset:2px}
+#msg{color:var(--gold-d)}
+.wnote{color:#8a7a62}
+.w{background:var(--paper);border:1px solid var(--gold);border-radius:16px}
+.w b{color:var(--gold-d)}.w small{color:#8a7a62}
+.ag2 .ti{border-color:var(--gold);border-radius:16px}
+.lb img{border:2px solid var(--gold);border-radius:14px}
+.lb button{border-color:var(--gold);border-radius:50%}
+.ag.cf .ti{border-color:rgba(245,240,228,.85)}
 </style>
 </head>
 <body>
